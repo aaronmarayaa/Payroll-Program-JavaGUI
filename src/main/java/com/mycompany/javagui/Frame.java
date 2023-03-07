@@ -90,7 +90,6 @@ public class Frame {
         
         //Footer Panel
         JPanel footer = new JPanel(new BorderLayout());
-            
             JPanel earnings_panel = new JPanel();
             Border earnings_border = BorderFactory.createTitledBorder(
                     BorderFactory.createLineBorder(Color.white, 2),
@@ -124,9 +123,7 @@ public class Frame {
                 deductions.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 5));
                 deductions.add(deductions_panel, BorderLayout.NORTH);
             footer.add(deductions, BorderLayout.EAST);
-            frame.add(footer, BorderLayout.CENTER);
         
-        JPanel footer2 = new JPanel();
             JPanel summary_panel = new JPanel();
             Border summary_border = BorderFactory.createTitledBorder(
                     BorderFactory.createLineBorder(Color.white, 2),
@@ -138,20 +135,27 @@ public class Frame {
             );
             summary_panel.setBorder(summary_border);
             summary_panel.setBackground(new Color(128, 128, 255));
-            summary_panel.setPreferredSize(new Dimension(350, 160));
+            summary_panel.setPreferredSize(new Dimension(355, 20));
             JPanel summary = new JPanel(new BorderLayout());
-                summary.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                summary.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
                 summary.add(summary_panel, BorderLayout.WEST);
-            footer2.add(summary, BorderLayout.WEST);
+            footer.add(summary, BorderLayout.SOUTH);
             
             JPanel received_panel = new JPanel();
             received_panel.setBackground(new Color(128, 128, 255));
-            received_panel.setPreferredSize(new Dimension(350, 160));
+            received_panel.setPreferredSize(new Dimension(350, 20));
             JPanel received = new JPanel(new BorderLayout());
-                received.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+                received.setBorder(BorderFactory.createEmptyBorder(0, 0, 5,5));
                 received.add(received_panel, BorderLayout.EAST);
-            footer2.add(received, BorderLayout.NORTH);
-            frame.add(footer2, BorderLayout.SOUTH);
+            footer.add(received, BorderLayout.SOUTH);
+            footer.setLayout(new GridLayout(2, 2, 5, 0));
+            frame.add(footer, BorderLayout.CENTER);
+
+        JPanel buttons = new JPanel();
+            buttons.add(new JButton("Print"));
+            buttons.add(new JButton("Clear"));
+            buttons.add(new JButton("Exit"));
+        frame.add(buttons, BorderLayout.SOUTH);
         
         
         frame.setResizable(false); //disallowed resize
