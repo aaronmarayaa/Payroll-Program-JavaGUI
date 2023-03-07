@@ -55,6 +55,43 @@ public class Frame {
             employeeInformation_panel.setBorder(employeeInformation_border);
             employeeInformation_panel.setBackground(new Color(128, 128, 255));
             employeeInformation_panel.setPreferredSize(new Dimension(300, 75));
+                
+                employeeInformation_panel.setLayout(null);
+                JLabel monthLabel = new JLabel("Month:");
+                monthLabel.setBounds(10, 15, 80, 25);
+                employeeInformation_panel.add(monthLabel);
+                
+                String[] month_options = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+                JComboBox<String> monthMenu = new JComboBox<>(month_options);
+                monthMenu.setBounds(70, 20, 200, 20);
+                employeeInformation_panel.add(monthMenu);
+                
+                JLabel positionLabel = new JLabel("Position:");
+                positionLabel.setBounds(10, 45, 80, 25);
+                employeeInformation_panel.add(positionLabel);
+                
+                String[] position_options = {"Merchandiser", "Bagger", "Cashier"};
+                JComboBox<String> positionMenu = new JComboBox<>(position_options);
+                positionMenu.setBounds(70, 45, 200, 20);
+                employeeInformation_panel.add(positionMenu);
+                
+                JLabel employeeName = new JLabel("Employee Name:");
+                employeeName.setBounds(300, 15, 100, 25);
+                employeeInformation_panel.add(employeeName);
+                
+                JTextField employeeName_textField = new JTextField();
+                String employeeName_value = employeeName_textField.getText();
+                employeeName_textField.setBounds(400, 17, 200, 20);
+                employeeInformation_panel.add(employeeName_textField);
+                
+                JLabel address = new JLabel("Address:");
+                address.setBounds(300, 45, 80, 25);
+                employeeInformation_panel.add(address);
+                
+                JTextField address_textField = new JTextField();
+                address_textField.setBounds(400, 47, 200, 20);
+                employeeInformation_panel.add(address_textField);
+                
             JPanel employeeInformation = new JPanel(new BorderLayout());
                 employeeInformation.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
                 employeeInformation.add(employeeInformation_panel, BorderLayout.NORTH);
