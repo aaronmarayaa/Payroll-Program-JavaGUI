@@ -24,8 +24,7 @@ public class Frame {
             menu.add(edit);
         frame.setJMenuBar(menu);
 
-        BorderLayout layout = new BorderLayout();
-        frame.setLayout(layout);
+        frame.setLayout(new BorderLayout());
         
         JPanel headerPanel = new JPanel(new BorderLayout());
 // create a nested panel for the top row of the header
@@ -51,15 +50,9 @@ public class Frame {
 
 // create a nested panel for the employee information
         JPanel employeeInformation_panel = new JPanel();
-            Border border = BorderFactory.createTitledBorder(
-                    BorderFactory.createLineBorder(Color.white, 2),
-                    "Employee Information",
-                    TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION,
-                    new Font("Arial", Font.BOLD, 14), // create a custom font object with the desired color
-                    Color.blue // set the font color to red
-            );
-            employeeInformation_panel.setBorder(border);
+            TitledBorder employeeInformation_border = BorderFactory.createTitledBorder("Salary Information");
+            employeeInformation_border.setTitleColor(Color.BLUE);
+            employeeInformation_panel.setBorder(employeeInformation_border);
             employeeInformation_panel.setBackground(new Color(128, 128, 255));
             employeeInformation_panel.setPreferredSize(new Dimension(300, 75));
             JPanel employeeInformation = new JPanel(new BorderLayout());
@@ -71,17 +64,11 @@ public class Frame {
 
 // create a nested panel for the salary information
         JPanel salaryInformation_panel = new JPanel();
-        Border salaryInformation_border = BorderFactory.createTitledBorder(
-                BorderFactory.createLineBorder(Color.white, 2),
-                "Salary Information",
-                TitledBorder.DEFAULT_JUSTIFICATION,
-                TitledBorder.DEFAULT_POSITION,
-                new Font("Arial", Font.BOLD, 14), // create a custom font object with the desired color
-                Color.blue // set the font color to red
-        );
-        salaryInformation_panel.setBorder(salaryInformation_border);
-        salaryInformation_panel.setBackground(new Color(128, 128, 255));
-        salaryInformation_panel.setPreferredSize(new Dimension(300, 100));
+            TitledBorder salaryInformation_border = BorderFactory.createTitledBorder("Salary Information");
+            salaryInformation_border.setTitleColor(Color.BLUE);
+            salaryInformation_panel.setBorder(salaryInformation_border);
+            salaryInformation_panel.setBackground(new Color(128, 128, 255));
+            salaryInformation_panel.setPreferredSize(new Dimension(300, 100));
         headerPanel.add(salaryInformation_panel, BorderLayout.SOUTH);
 
         //Add padding to the header panel to position the employee information and salary information panels lower
@@ -91,14 +78,8 @@ public class Frame {
         //Footer Panel
         JPanel footer = new JPanel(new BorderLayout());
             JPanel earnings_panel = new JPanel();
-            Border earnings_border = BorderFactory.createTitledBorder(
-                    BorderFactory.createLineBorder(Color.white, 2),
-                    "Earnings",
-                    TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION,
-                    new Font("Arial", Font.BOLD, 14), // create a custom font object with the desired color
-                    Color.blue // set the font color to red
-            );
+            TitledBorder earnings_border = BorderFactory.createTitledBorder("Salary Information");
+            earnings_border.setTitleColor(Color.BLUE);
             earnings_panel.setBorder(earnings_border);
             earnings_panel.setBackground(new Color(128, 128, 255));
             earnings_panel.setPreferredSize(new Dimension(350, 160));
@@ -108,14 +89,8 @@ public class Frame {
             footer.add(earnings, BorderLayout.WEST);
             
             JPanel deductions_panel = new JPanel();
-            Border deductions_border = BorderFactory.createTitledBorder(
-                    BorderFactory.createLineBorder(Color.white, 2),
-                    "Deductions",
-                    TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION,
-                    new Font("Arial", Font.BOLD, 14), // create a custom font object with the desired color
-                    Color.blue // set the font color to red
-            );
+            TitledBorder deductions_border = BorderFactory.createTitledBorder("Salary Information");
+            deductions_border.setTitleColor(Color.BLUE);
             deductions_panel.setBorder(deductions_border);
             deductions_panel.setBackground(new Color(128, 128, 255));
             deductions_panel.setPreferredSize(new Dimension(350, 160));
@@ -125,27 +100,21 @@ public class Frame {
             footer.add(deductions, BorderLayout.EAST);
         
             JPanel summary_panel = new JPanel();
-            Border summary_border = BorderFactory.createTitledBorder(
-                    BorderFactory.createLineBorder(Color.white, 2),
-                    "Summary",
-                    TitledBorder.DEFAULT_JUSTIFICATION,
-                    TitledBorder.DEFAULT_POSITION,
-                    new Font("Arial", Font.BOLD, 14), // create a custom font object with the desired color
-                    Color.blue // set the font color to red
-            );
+            TitledBorder summary_border = BorderFactory.createTitledBorder("SUMMARY");
+            summary_border.setTitleColor(Color.BLUE);
             summary_panel.setBorder(summary_border);
             summary_panel.setBackground(new Color(128, 128, 255));
-            summary_panel.setPreferredSize(new Dimension(355, 20));
+            summary_panel.setPreferredSize(new Dimension(354, 90));
             JPanel summary = new JPanel(new BorderLayout());
-                summary.setBorder(BorderFactory.createEmptyBorder(0, 0, 5, 0));
+                summary.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
                 summary.add(summary_panel, BorderLayout.WEST);
             footer.add(summary, BorderLayout.SOUTH);
             
             JPanel received_panel = new JPanel();
             received_panel.setBackground(new Color(128, 128, 255));
-            received_panel.setPreferredSize(new Dimension(350, 20));
+            received_panel.setPreferredSize(new Dimension(350, 90));
             JPanel received = new JPanel(new BorderLayout());
-                received.setBorder(BorderFactory.createEmptyBorder(0, 0, 5,5));
+                received.setBorder(BorderFactory.createEmptyBorder(5, 0, 5,5));
                 received.add(received_panel, BorderLayout.EAST);
             footer.add(received, BorderLayout.SOUTH);
             footer.setLayout(new GridLayout(2, 2, 5, 0));
@@ -155,6 +124,7 @@ public class Frame {
             buttons.add(new JButton("Print"));
             buttons.add(new JButton("Clear"));
             buttons.add(new JButton("Exit"));
+            buttons.setPreferredSize(new Dimension(350, 40));
         frame.add(buttons, BorderLayout.SOUTH);
         
         
