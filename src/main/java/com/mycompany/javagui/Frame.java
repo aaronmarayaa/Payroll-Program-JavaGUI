@@ -130,15 +130,17 @@ public class Frame {
                 });
                 salaryInformation_panel.add(salaryLevel_textField);
                 
-                                
+                // salary rate text                
                 JLabel salaryRate = new JLabel("Salary Rate:");
                 salaryRate.setBounds(10, 45, 80, 25);
                 salaryInformation_panel.add(salaryRate);
                 
+                //salary rate text field
                 JTextField salaryRate_textField = new JTextField();
                 salaryRate_textField.setBounds(100, 45, 150, 20);
                 salaryInformation_panel.add(salaryRate_textField);
                 
+                //salary rate button
                 JButton ok_button = new JButton("Ok");
                 ok_button.setBounds(160, 20, 50,20);
                 ok_button.addActionListener(new ActionListener() {
@@ -166,16 +168,152 @@ public class Frame {
                     }
                 });
                 salaryInformation_panel.add(ok_button);
+                
+                //late text
+                JLabel late = new JLabel("Late:");
+                late.setBounds(10, 70, 60, 20);
+                salaryInformation_panel.add(late);
+                
+                //late text field
+                JTextField late_textField = new JTextField();
+                late_textField.setBounds(45, 70, 40, 20);
+                late_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                    // Check if the key pressed is not a digit
+                        if (!Character.isDigit(e.getKeyChar())) {
+                            e.consume(); // Consume the event to prevent it from being processed
+                        }
+                    }
+                });
+                salaryInformation_panel.add(late_textField);
+                
+                //absent text
+                JLabel absent = new JLabel("Absent:");
+                absent.setBounds(100, 70, 60, 20);
+                salaryInformation_panel.add(absent);
+                
+                //absent text field
+                JTextField absent_textField = new JTextField();
+                absent_textField.setBounds(150, 70, 40, 20);
+                absent_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        if (!Character.isDigit(e.getKeyChar())) {
+                            e.consume(); // Consume the event to prevent it from being processed
+                        }
+                    }
+                });
+                salaryInformation_panel.add(absent_textField);
+                
+                // hours working text
+                JLabel hoursWorking = new JLabel("Hours working:");
+                hoursWorking.setBounds(265, 15, 90, 20);
+                salaryInformation_panel.add(hoursWorking);
+                
+                // hours working text field
+                JTextField hoursWorking_textField = new JTextField();
+                hoursWorking_textField.setBounds(365, 15, 85, 20);
+                hoursWorking_textField.addKeyListener(new KeyAdapter(){
+                   @Override
+                   public void keyTyped(KeyEvent e) {
+                       if(!Character.isDigit(e.getKeyChar())){
+                           e.consume();
+                       }
+                   }
+                });
+                salaryInformation_panel.add(hoursWorking_textField);
+                
+                //hours overtime text
+                JLabel hoursOverTime = new JLabel("Hours OverTime:");
+                hoursOverTime.setBounds(265, 45, 120, 20);
+                salaryInformation_panel.add(hoursOverTime);
+                
+                //hours overtime text field
+                JTextField hoursOverTime_textField = new JTextField();
+                hoursOverTime_textField.setBounds(365, 48, 85, 20);
+                hoursOverTime_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }    
+                });
+                salaryInformation_panel.add(hoursOverTime_textField);
+                
+                //regular pay text
+                JLabel regularPay = new JLabel("Regular Pay:");
+                regularPay.setBounds(470, 15, 90, 20);
+                salaryInformation_panel.add(regularPay);
+                
+                //regular pay text field
+                JTextField regularPay_textField = new JTextField();
+                regularPay_textField.setBounds(550, 15, 85, 20);
+                regularPay_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+                salaryInformation_panel.add(regularPay_textField);
+                
+                //overtime pay text
+                JLabel overtimePay = new JLabel("Overtime Pay:");
+                overtimePay.setBounds(470, 45, 90, 20);
+                salaryInformation_panel.add(overtimePay);
+                
+                //overtime pay text field
+                JTextField overtimePay_textField = new JTextField();
+                overtimePay_textField.setBounds(550, 45, 85, 20);
+                overtimePay_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+                salaryInformation_panel.add(overtimePay_textField);
+                
+                //gross pay text
+                JLabel grossPay = new JLabel("Gross pay:");
+                grossPay.setBounds(472,70, 90, 20);
+                salaryInformation_panel.add(grossPay);
+                
+                //gross pay text field
+                JTextField grossPay_textField = new JTextField();
+                grossPay_textField.setBounds(550, 70, 85, 20);
+                salaryInformation_panel.add(grossPay_textField);
+                
+                //compute button
+                JButton compute_button = new JButton("Compute");
+                compute_button.setBounds(300, 75, 90, 20);
+                compute_button.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        double hourlyRate = Double.parseDouble(salaryRate_textField.getText()) / 8;
+                        double regularPay_value = hourlyRate * Double.parseDouble(hoursWorking_textField.getText());
+                        regularPay_textField.setText(String.format("%.2f", regularPay_value));
+                        double overTimePay = Double.parseDouble(hoursOverTime_textField.getText()) * (Double.parseDouble(salaryRate_textField.getText()) / 8) * 1.1;
+                        overtimePay_textField.setText(String.format("%.2f",overTimePay));
+                        double grossPay_value = regularPay_value + overTimePay;
+                        grossPay_textField.setText(String.format("%.2f", grossPay_value));
+                    }
+                });
+                salaryInformation_panel.add(compute_button);
         informationPanel.add(salaryInformation_panel, BorderLayout.SOUTH);
         frame.add(informationPanel, BorderLayout.NORTH);
         
         //Footer Panel
         JPanel footer = new JPanel(new BorderLayout());
             footer.setLayout(new GridLayout(2, 2, 5, 0));
-
+            
             //earnings section
             JPanel earnings_panel = new JPanel();
-            TitledBorder earnings_border = BorderFactory.createTitledBorder("Salary Information");
+            TitledBorder earnings_border = BorderFactory.createTitledBorder("Earnings");
             earnings_border.setTitleColor(Color.BLUE);
             earnings_panel.setBorder(earnings_border);
             earnings_panel.setBackground(new Color(128, 128, 255));
@@ -187,7 +325,7 @@ public class Frame {
             
             //deduction section
             JPanel deductions_panel = new JPanel();
-            TitledBorder deductions_border = BorderFactory.createTitledBorder("Salary Information");
+            TitledBorder deductions_border = BorderFactory.createTitledBorder("Deductions");
             deductions_border.setTitleColor(Color.BLUE);
             deductions_panel.setBorder(deductions_border);
             deductions_panel.setBackground(new Color(128, 128, 255));
