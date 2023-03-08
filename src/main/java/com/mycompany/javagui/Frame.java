@@ -294,13 +294,18 @@ public class Frame {
                 compute_button.addActionListener(new ActionListener(){
                     @Override
                     public void actionPerformed(ActionEvent e){
-                        double hourlyRate = Double.parseDouble(salaryRate_textField.getText()) / 8;
-                        double regularPay_value = hourlyRate * Double.parseDouble(hoursWorking_textField.getText());
-                        regularPay_textField.setText(String.format("%.2f", regularPay_value));
-                        double overTimePay = Double.parseDouble(hoursOverTime_textField.getText()) * (Double.parseDouble(salaryRate_textField.getText()) / 8) * 1.1;
-                        overtimePay_textField.setText(String.format("%.2f",overTimePay));
-                        double grossPay_value = regularPay_value + overTimePay;
-                        grossPay_textField.setText(String.format("%.2f", grossPay_value));
+                        try {
+                            double hourlyRate = Double.parseDouble(salaryRate_textField.getText()) / 8;
+                            double regularPay_value = hourlyRate * Double.parseDouble(hoursWorking_textField.getText());
+                            regularPay_textField.setText(String.format("%.2f", regularPay_value));
+                            double overTimePay = Double.parseDouble(hoursOverTime_textField.getText()) * (Double.parseDouble(salaryRate_textField.getText()) / 8) * 1.1;
+                            overtimePay_textField.setText(String.format("%.2f",overTimePay));
+                            double grossPay_value = regularPay_value + overTimePay;
+                            grossPay_textField.setText(String.format("%.2f", grossPay_value));
+                        } catch(NumberFormatException a) {
+                            hoursWorking_textField.setText("");
+                            hoursOverTime_textField.setText("");
+                        }
                     }
                 });
                 salaryInformation_panel.add(compute_button);
@@ -318,6 +323,90 @@ public class Frame {
             earnings_panel.setBorder(earnings_border);
             earnings_panel.setBackground(new Color(128, 128, 255));
             earnings_panel.setPreferredSize(new Dimension(350, 160));
+                
+                earnings_panel.setLayout(null);
+                JLabel allowance = new JLabel("Allowance");
+                allowance.setBounds(10, 15, 80, 20);
+                earnings_panel.add(allowance);
+                
+                JLabel amount = new JLabel("Amount");
+                amount.setBounds(190, 15, 80, 20);
+                earnings_panel.add(amount);
+                
+                //transaction allowance text
+                JLabel transactionAllowance = new JLabel("TRANSACTION ALLOWANCE:");
+                transactionAllowance.setBounds(10, 45, 200, 20);
+                earnings_panel.add(transactionAllowance);
+                
+                //transaction allowance text field
+                JTextField transactionAllowance_textField = new JTextField();
+                transactionAllowance_textField.setBounds(180, 45, 105, 20);
+                transactionAllowance_textField.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+                earnings_panel.add(transactionAllowance_textField);
+                
+                //incentives text
+                JLabel incentives = new JLabel("INCENTIVES");
+                incentives.setBounds(13, 70, 90, 20);
+                earnings_panel.add(incentives);
+                
+                //incentives text field
+                JTextField incentives_textField = new JTextField();
+                incentives_textField.setBounds(180, 70, 105, 20);
+                incentives_textField.addKeyListener(new KeyAdapter(){
+                   @Override
+                   public void keyTyped(KeyEvent e){
+                       if(!Character.isDigit(e.getKeyChar())){
+                           e.consume();
+                       }
+                   }
+                });
+                earnings_panel.add(incentives_textField);
+                
+                //total allowance text
+                JLabel totalAllowance = new JLabel("TOTAL ALLOWANCE:");
+                totalAllowance.setBounds(55, 125, 150, 20);
+                earnings_panel.add(totalAllowance);
+                
+                //total allowance text field
+                JTextField totalAllowance_textField = new JTextField();
+                totalAllowance_textField.setBounds(180, 125, 105, 20);
+                earnings_panel.add(totalAllowance_textField);
+                
+                //uniform allowance text
+                JLabel uniformAllowance = new JLabel("UNIFORM ALLOWANCE");
+                uniformAllowance.setBounds(13, 95, 130, 20);
+                earnings_panel.add(uniformAllowance);
+                
+                //uniform allowance text field
+                JTextField uniformAllowance_textField = new JTextField();
+                uniformAllowance_textField.setBounds(180, 95, 105, 20);
+                uniformAllowance_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+                uniformAllowance_textField.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        double totalAllowance_value =
+                        Double.parseDouble(transactionAllowance_textField.getText()) +
+                        Double.parseDouble(incentives_textField.getText()) +
+                        Double.parseDouble(uniformAllowance_textField.getText());
+                        
+                        totalAllowance_textField.setText(String.format("%.2f", totalAllowance_value));
+                    }
+                });
+                earnings_panel.add(uniformAllowance_textField);
             JPanel earnings = new JPanel(new BorderLayout());
                 earnings.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
                 earnings.add(earnings_panel, BorderLayout.NORTH);
