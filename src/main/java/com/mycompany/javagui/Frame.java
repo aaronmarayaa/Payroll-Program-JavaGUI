@@ -421,13 +421,117 @@ public class Frame {
             deductions_panel.setPreferredSize(new Dimension(350, 160));
                 
                 deductions_panel.setLayout(null);
-                //dedution text
+                //deduction text
                 JLabel deduction = new JLabel("Deduction");
                 deduction.setBounds(10, 15, 90, 20);
                 deductions_panel.add(deduction);
                 
                 JLabel deduction_amount = new JLabel("Amount");
-                deduction_amount.setBounds(190, 15, 80, 20);
+                deduction_amount.setBounds(195, 15, 80, 20);
+                deductions_panel.add(deduction_amount);
+                
+                //pera/sss text
+                JLabel peraSSS = new JLabel("PERA/SSS");
+                peraSSS.setBounds(10, 35, 85, 20);
+                deductions_panel.add(peraSSS);
+                
+                //pera/sss text field
+                JTextField peraSSS_textField = new JTextField();
+                peraSSS_textField.setBounds(190, 35, 85, 15);
+                peraSSS_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+                deductions_panel.add(peraSSS_textField);
+                
+                //sss loan text
+                JLabel sssLoan = new JLabel("SSS LOAN");
+                sssLoan.setBounds(10, 55, 90, 20);
+                deductions_panel.add(sssLoan);
+                
+                //sss loan text field
+                JTextField sssLoan_textField = new JTextField();
+                sssLoan_textField.setBounds(190, 55, 85, 15);
+                sssLoan_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+                deductions_panel.add(sssLoan_textField);
+                
+                //gsis text
+                JLabel gsis = new JLabel("GSIS");
+                gsis.setBounds(10, 75, 85, 20);
+                deductions_panel.add(gsis);
+                
+                //gsis text field
+                JTextField gsis_textField = new JTextField();
+                gsis_textField.setBounds(190, 75, 85, 15);
+                gsis_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+
+                deductions_panel.add(gsis_textField);
+                
+                //tax withheld text
+                JLabel taxWithheld = new JLabel("TAX WITHHELD");
+                taxWithheld.setBounds(10, 95, 100, 20);
+                deductions_panel.add(taxWithheld);
+                
+                //tax withheld text field
+                JTextField taxWithheld_textField = new JTextField();
+                taxWithheld_textField.setBounds(190, 95, 85, 15);
+                taxWithheld_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+
+                deductions_panel.add(taxWithheld_textField);
+                
+                //tardiness text
+                JLabel tardiness = new JLabel("TARDINESS");
+                tardiness.setBounds(10, 115, 85, 20);
+                deductions_panel.add(tardiness);
+                
+                //tardiness text field
+                JTextField tardiness_textField = new JTextField();
+                tardiness_textField.setBounds(190, 115, 85, 15);
+                tardiness_textField.addKeyListener(new KeyAdapter(){
+                    @Override
+                    public void keyTyped(KeyEvent e){
+                        if(!Character.isDigit(e.getKeyChar())){
+                            e.consume();
+                        }
+                    }
+                });
+
+                deductions_panel.add(tardiness_textField);
+                
+                //total deductions text
+                JLabel totalDeductions = new JLabel("TOTAL DEDUCTIONS");
+                totalDeductions.setBounds(10, 135, 120, 20);
+                deductions_panel.add(totalDeductions);
+                
+                //total deductions text field
+                JTextField totalDeductions_textField = new JTextField();
+                totalDeductions_textField.setBounds(190, 135, 85, 15);
+                deductions_panel.add(totalDeductions_textField);
             
             JPanel deductions = new JPanel(new BorderLayout());
                 deductions.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 5));
