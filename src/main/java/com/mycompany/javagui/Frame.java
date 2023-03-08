@@ -419,6 +419,16 @@ public class Frame {
             deductions_panel.setBorder(deductions_border);
             deductions_panel.setBackground(new Color(128, 128, 255));
             deductions_panel.setPreferredSize(new Dimension(350, 160));
+                
+                deductions_panel.setLayout(null);
+                //dedution text
+                JLabel deduction = new JLabel("Deduction");
+                deduction.setBounds(10, 15, 90, 20);
+                deductions_panel.add(deduction);
+                
+                JLabel deduction_amount = new JLabel("Amount");
+                deduction_amount.setBounds(190, 15, 80, 20);
+            
             JPanel deductions = new JPanel(new BorderLayout());
                 deductions.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 5));
                 deductions.add(deductions_panel, BorderLayout.NORTH);
@@ -450,7 +460,14 @@ public class Frame {
         JPanel buttons = new JPanel();
             buttons.add(new JButton("Print"));
             buttons.add(new JButton("Clear"));
-            buttons.add(new JButton("Exit"));
+            JButton exit = new JButton("Exit");
+            exit.addActionListener(new ActionListener(){
+               @Override
+               public void actionPerformed(ActionEvent e){
+                   frame.dispose();
+               }
+            });
+            buttons.add(exit);
             buttons.setPreferredSize(new Dimension(350, 40));
         frame.add(buttons, BorderLayout.SOUTH);
         
