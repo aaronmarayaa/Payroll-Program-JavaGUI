@@ -250,14 +250,6 @@ public class Frame {
                 //regular pay text field
                 JTextField regularPay_textField = new JTextField();
                 regularPay_textField.setBounds(550, 15, 85, 20);
-                regularPay_textField.addKeyListener(new KeyAdapter(){
-                    @Override
-                    public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
-                            e.consume();
-                        }
-                    }
-                });
                 salaryInformation_panel.add(regularPay_textField);
                 
                 //overtime pay text
@@ -268,14 +260,6 @@ public class Frame {
                 //overtime pay text field
                 JTextField overtimePay_textField = new JTextField();
                 overtimePay_textField.setBounds(550, 45, 85, 20);
-                overtimePay_textField.addKeyListener(new KeyAdapter(){
-                    @Override
-                    public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
-                            e.consume();
-                        }
-                    }
-                });
                 salaryInformation_panel.add(overtimePay_textField);
                 
                 //gross pay text
@@ -534,10 +518,10 @@ public class Frame {
                 deductions_panel.add(totalDeductions_textField);
             
             JPanel deductions = new JPanel(new BorderLayout());
-                deductions.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 5));
+                deductions.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
                 deductions.add(deductions_panel, BorderLayout.NORTH);
             footer.add(deductions, BorderLayout.EAST);
-
+            
             //summary section
             JPanel summary_panel = new JPanel();
             TitledBorder summary_border = BorderFactory.createTitledBorder("SUMMARY");
@@ -545,6 +529,49 @@ public class Frame {
             summary_panel.setBorder(summary_border);
             summary_panel.setBackground(new Color(128, 128, 255));
             summary_panel.setPreferredSize(new Dimension(354, 90));
+            
+                summary_panel.setLayout(null);
+                //gross pay php text
+                JLabel grossPayPhp = new JLabel("GROSS PAY:                          PHP");
+                grossPayPhp.setBounds(10, 25, 200, 20);
+                summary_panel.add(grossPayPhp);
+                
+                //gross pay php text field
+                JTextField grossPayPhp_textField = new JTextField();
+                grossPayPhp_textField.setBounds(200, 25, 90, 20);
+                summary_panel.add(grossPayPhp_textField);
+                
+                //total allowance php text
+                JLabel  totalAllowancePhp = new JLabel("TOTAL ALLOWANCE:          PHP");
+                totalAllowancePhp.setBounds(10, 50, 200, 20);
+                summary_panel.add(totalAllowancePhp);
+                
+                //total allowance php text field
+                JTextField totalAllowancePhp_textField = new JTextField();
+                totalAllowancePhp_textField.setBounds(200, 50, 90, 20);
+                summary_panel.add(totalAllowancePhp_textField);                
+                
+                //total deduction php text
+                JLabel totalDeductionPhp = new JLabel("TOTAL DEDUCTIONS:          PHP");
+                totalDeductionPhp.setBounds(10, 80, 200, 20);
+                summary_panel.add(totalDeductionPhp);
+                
+                //total deduction php text field
+                JTextField totalDeductionPhp_textField = new JTextField();
+                totalDeductionPhp_textField.setBounds(200, 80, 90, 20);
+                summary_panel.add(totalDeductionPhp_textField);
+                
+                //net pay php text
+                JLabel netPayPhp = new JLabel("NET PAY:     PHP");
+                netPayPhp.setBounds(50, 115, 200, 20);
+                netPayPhp.setForeground(new Color(102, 26, 255));
+                summary_panel.add(netPayPhp);
+                
+                //net pay php text field
+                JTextField netPayPhp_textField =new JTextField();
+                netPayPhp_textField.setBounds(200, 115, 90, 20);
+                summary_panel.add(netPayPhp_textField);
+            
             JPanel summary = new JPanel(new BorderLayout());
                 summary.setBorder(BorderFactory.createEmptyBorder(5, 0, 5, 0));
                 summary.add(summary_panel, BorderLayout.WEST);
@@ -554,8 +581,33 @@ public class Frame {
             JPanel received_panel = new JPanel();
             received_panel.setBackground(new Color(128, 128, 255));
             received_panel.setPreferredSize(new Dimension(350, 90));
+            
+                received_panel.setLayout(null);
+                JLabel receivedBy = new JLabel("RECEIVED BY:");
+                receivedBy.setBounds(10, 20, 100, 20);
+                received_panel.add(receivedBy);
+                
+                JLabel employee_name = new JLabel("");
+                employeeName_textField.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        employee_name.setText(employeeName_textField.getText());
+                    }
+                });
+                employee_name.setBounds(120, 60, 200, 20);
+                received_panel.add(employee_name);
+                
+                JLabel separator = new JLabel("");
+                separator.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.BLACK));                
+                separator.setBounds(70, 90, 200, 20);
+                received_panel.add(separator);
+                
+                JLabel signature = new JLabel("Signature");
+                signature.setBounds(140, 110, 85, 20);
+                received_panel.add(signature);
+            
             JPanel received = new JPanel(new BorderLayout());
-                received.setBorder(BorderFactory.createEmptyBorder(5, 0, 5,5));
+                received.setBorder(BorderFactory.createEmptyBorder(5, 0, 5,0));
                 received.add(received_panel, BorderLayout.EAST);
             footer.add(received, BorderLayout.SOUTH);
             frame.add(footer, BorderLayout.CENTER);
@@ -563,7 +615,11 @@ public class Frame {
         //buttons
         JPanel buttons = new JPanel();
             buttons.add(new JButton("Print"));
-            buttons.add(new JButton("Clear"));
+            
+            JButton clear = new JButton("Clear");
+        
+            buttons.add(clear);
+            
             JButton exit = new JButton("Exit");
             exit.addActionListener(new ActionListener(){
                @Override
@@ -572,10 +628,11 @@ public class Frame {
                }
             });
             buttons.add(exit);
+            
             buttons.setPreferredSize(new Dimension(350, 40));
         frame.add(buttons, BorderLayout.SOUTH);
         
-        
+        frame.setLocationRelativeTo(null);
         frame.setResizable(false); //disallowed resize
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true); // make the frame visible
