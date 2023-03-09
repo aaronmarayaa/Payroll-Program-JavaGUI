@@ -217,7 +217,8 @@ public class Frame {
                 hoursWorking_textField.addKeyListener(new KeyAdapter(){
                    @Override
                    public void keyTyped(KeyEvent e) {
-                       if(!Character.isDigit(e.getKeyChar())){
+                       char ch = e.getKeyChar();
+                       if(!Character.isDigit(ch) && ch != '.'){
                            e.consume();
                        }
                    }
@@ -235,7 +236,8 @@ public class Frame {
                 hoursOverTime_textField.addKeyListener(new KeyAdapter(){
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }    
@@ -275,24 +277,6 @@ public class Frame {
                 //compute button
                 JButton compute_button = new JButton("Compute");
                 compute_button.setBounds(300, 75, 90, 20);
-                compute_button.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e){
-                        try {
-                            double hourlyRate = Double.parseDouble(salaryRate_textField.getText()) / 8;
-                            double regularPay_value = hourlyRate * Double.parseDouble(hoursWorking_textField.getText());
-                            regularPay_textField.setText(String.format("%.2f", regularPay_value));
-                            double overTimePay = Double.parseDouble(hoursOverTime_textField.getText()) * (Double.parseDouble(salaryRate_textField.getText()) / 8) * 1.1;
-                            overtimePay_textField.setText(String.format("%.2f",overTimePay));
-                            double grossPay_value = regularPay_value + overTimePay;
-                            grossPay_textField.setText(String.format("%.2f", grossPay_value));
-                        } catch(NumberFormatException a) {
-                            hoursWorking_textField.setText("");
-                            hoursOverTime_textField.setText("");
-                        }
-                    }
-                });
-                salaryInformation_panel.add(compute_button);
         informationPanel.add(salaryInformation_panel, BorderLayout.SOUTH);
         frame.add(informationPanel, BorderLayout.NORTH);
         
@@ -328,7 +312,8 @@ public class Frame {
                 transactionAllowance_textField.addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }
@@ -346,7 +331,8 @@ public class Frame {
                 incentives_textField.addKeyListener(new KeyAdapter(){
                    @Override
                    public void keyTyped(KeyEvent e){
-                       if(!Character.isDigit(e.getKeyChar())){
+                       char ch = e.getKeyChar();
+                       if(!Character.isDigit(ch) && ch != '.'){
                            e.consume();
                        }
                    }
@@ -374,23 +360,13 @@ public class Frame {
                 uniformAllowance_textField.addKeyListener(new KeyAdapter(){
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }
                 });
-                uniformAllowance_textField.addActionListener(new ActionListener(){
-                    @Override
-                    public void actionPerformed(ActionEvent e){
-                        double totalAllowance_value =
-                        Double.parseDouble(transactionAllowance_textField.getText()) +
-                        Double.parseDouble(incentives_textField.getText()) +
-                        Double.parseDouble(uniformAllowance_textField.getText());
-                        
-                        totalAllowance_textField.setText(String.format("%.2f", totalAllowance_value));
-                    }
-                });
-                earnings_panel.add(uniformAllowance_textField);
+                
             JPanel earnings = new JPanel(new BorderLayout());
                 earnings.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
                 earnings.add(earnings_panel, BorderLayout.NORTH);
@@ -425,7 +401,8 @@ public class Frame {
                 peraSSS_textField.addKeyListener(new KeyAdapter(){
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }
@@ -443,7 +420,8 @@ public class Frame {
                 sssLoan_textField.addKeyListener(new KeyAdapter(){
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }
@@ -461,7 +439,8 @@ public class Frame {
                 gsis_textField.addKeyListener(new KeyAdapter(){
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }
@@ -480,7 +459,8 @@ public class Frame {
                 taxWithheld_textField.addKeyListener(new KeyAdapter(){
                     @Override
                     public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
+                        char ch = e.getKeyChar();
+                        if(!Character.isDigit(ch) && ch != '.'){
                             e.consume();
                         }
                     }
@@ -496,15 +476,6 @@ public class Frame {
                 //tardiness text field
                 JTextField tardiness_textField = new JTextField();
                 tardiness_textField.setBounds(190, 115, 85, 15);
-                tardiness_textField.addKeyListener(new KeyAdapter(){
-                    @Override
-                    public void keyTyped(KeyEvent e){
-                        if(!Character.isDigit(e.getKeyChar())){
-                            e.consume();
-                        }
-                    }
-                });
-
                 deductions_panel.add(tardiness_textField);
                 
                 //total deductions text
@@ -631,6 +602,95 @@ public class Frame {
             
             buttons.setPreferredSize(new Dimension(350, 40));
         frame.add(buttons, BorderLayout.SOUTH);
+        
+        //compute button
+                        compute_button.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        try {
+                            double hourlyRate = Double.parseDouble(salaryRate_textField.getText()) / 8;
+                            double regularPay_value = hourlyRate * Double.parseDouble(hoursWorking_textField.getText());
+                            regularPay_textField.setText(String.format("%.2f", regularPay_value));
+                            double overTimePay = Double.parseDouble(hoursOverTime_textField.getText()) * (Double.parseDouble(salaryRate_textField.getText()) / 8) * 1.1;
+                            overtimePay_textField.setText(String.format("%.2f",overTimePay));
+                            double grossPay_value = regularPay_value + overTimePay;
+                            grossPay_textField.setText(String.format("%.2f", grossPay_value));
+                            
+                            //gross pay php
+                            grossPayPhp_textField.setText(String.format("%.2f", grossPay_value));
+                            
+                            //tardiness
+                            double late_arrival = Integer.parseInt(late_textField.getText()) / 60.0;
+                            double absences = Integer.parseInt(absent_textField.getText()) * Double.parseDouble(salaryRate_textField.getText());
+                            tardiness_textField.setText(String.format("%.2f", hourlyRate * late_arrival + absences));
+                            
+                            //gsis value
+                            String salaryLevel_value = salaryLevel_textField.getText();
+                            double gsis_value = Double.parseDouble(regularPay_textField.getText());
+                            if(salaryLevel_value.equals("1")){
+                                gsis_value *= 0.01;
+                                gsis_textField.setText(String.format("%.2f", gsis_value));
+                            } 
+                            else if(salaryLevel_value.equals("2")){
+                                gsis_value *= 0.015;
+                                gsis_textField.setText(String.format("%.2f", gsis_value));
+                            }
+                            else if(salaryLevel_value.equals("3")){
+                                gsis_value *= 0.02;
+                                gsis_textField.setText(String.format("%.2f", gsis_value));
+                            }
+                            else if(salaryLevel_value.equals("4")){
+                                gsis_value *= 0.03;
+                                gsis_textField.setText(String.format("%.2f", gsis_value));
+                            }
+                            else if(salaryLevel_value.equals("5")){
+                                gsis_value *= 0.04;
+                                gsis_textField.setText(String.format("%.2f", gsis_value));
+                            }
+                            else {
+                                gsis_textField.setText("0.00");
+                            }
+                        } catch(NumberFormatException a) {
+                        }
+                    }
+                });
+                salaryInformation_panel.add(compute_button);
+                
+                //uniform allowance text field function
+                uniformAllowance_textField.addActionListener(new ActionListener(){
+                    @Override
+                    public void actionPerformed(ActionEvent e){
+                        double totalAllowance_value =
+                        Double.parseDouble(transactionAllowance_textField.getText()) +
+                        Double.parseDouble(incentives_textField.getText()) +
+                        Double.parseDouble(uniformAllowance_textField.getText());
+                        
+                        totalAllowance_textField.setText(String.format("%.2f", totalAllowance_value));
+                        totalAllowancePhp_textField.setText(String.format("%.2f", totalAllowance_value));
+                    }
+                });
+                earnings_panel.add(uniformAllowance_textField);
+                
+                //tax withheld text field function
+                taxWithheld_textField.addActionListener(new ActionListener(){
+                   @Override
+                   public void actionPerformed(ActionEvent e){
+                       double totalDeductions_value = Double.parseDouble(peraSSS_textField.getText()) +
+                               Double.parseDouble(sssLoan_textField.getText()) + 
+                               Double.parseDouble(gsis_textField.getText()) +
+                               Double.parseDouble(taxWithheld_textField.getText()) +
+                               Double.parseDouble(tardiness_textField.getText());
+                       totalDeductions_textField.setText(String.format("%.2f", totalDeductions_value));
+                       totalDeductionPhp_textField.setText(String.format("%.2f", totalDeductions_value));
+                       
+                       //net pay text field value
+                       double netPayPhp_value = Double.parseDouble(grossPayPhp_textField.getText()) +
+                               Double.parseDouble(totalAllowancePhp_textField.getText()) - 
+                               Double.parseDouble(totalDeductionPhp_textField.getText());
+                       netPayPhp_textField.setText(String.format("%.2f", netPayPhp_value));
+                   }
+                });
+
         
         frame.setLocationRelativeTo(null);
         frame.setResizable(false); //disallowed resize
